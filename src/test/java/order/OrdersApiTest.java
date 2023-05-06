@@ -44,7 +44,7 @@ public class OrdersApiTest {
     }
 
     @Test
-    public void orderCanBeCreatedWithBlackColor() {
+    public void orderCanBeCreated() {
         orderClient.orderCreate(json)
                 .statusCode(201)
                 .body("track", notNullValue());
