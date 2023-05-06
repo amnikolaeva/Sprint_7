@@ -1,4 +1,8 @@
+package client;
+
 import io.restassured.response.ValidatableResponse;
+import model.Courier;
+import model.CourierCredentials;
 
 import static io.restassured.RestAssured.*;
 

@@ -1,4 +1,10 @@
+package courier;
+
+import client.CourierClient;
+import generator.CourierGenerator;
 import io.restassured.RestAssured;
+import model.Courier;
+import model.CourierCredentials;
 import org.junit.Before;
 import org.junit.Test;
 

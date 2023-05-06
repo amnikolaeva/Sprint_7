@@ -1,3 +1,6 @@
+package generator;
+
+import model.Courier;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class CourierGenerator {

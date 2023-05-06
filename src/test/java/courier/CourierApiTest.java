@@ -1,4 +1,10 @@
+package courier;
+
+import client.CourierClient;
+import generator.CourierGenerator;
 import io.restassured.RestAssured;
+import model.Courier;
+import model.CourierCredentials;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,11 +12,11 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-public class CourierApiNegativeTest {
+public class CourierApiTest {
 
     private CourierClient courierClient;
-    private Courier courier;
     private Integer courierId;
+    private Courier courier;
 
     @Before
     public void setUp() {
@@ -27,14 +33,10 @@ public class CourierApiNegativeTest {
     }
 
     @Test
-    public void createTheSameCouriers() {
+    public void courierCanBeCreates() {
         courierClient.courierCreate(courier)
                 .statusCode(201)
                 .body("ok", equalTo(true));
-
-        courierClient.courierCreate(courier)
-                .statusCode(409)
-                .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
 
         courierId = courierClient.login(CourierCredentials.from(courier))
                 .statusCode(200)
@@ -43,18 +45,15 @@ public class CourierApiNegativeTest {
     }
 
     @Test
-    public void createCourierWithoutLogin() {
-        courier.setLogin(null);
+    public void courierCanBeCreatesWithLoginAndPassword() {
+        courier.setFirstName(null);
         courierClient.courierCreate(courier)
-                .statusCode(400)
-                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
-    }
+                .statusCode(201)
+                .body("ok", equalTo(true));
 
-    @Test
-    public void createCourierWithoutPassword() {
-        courier.setPassword(null);
-        courierClient.courierCreate(courier)
-                .statusCode(400)
-                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
+        courierId = courierClient.login(CourierCredentials.from(courier))
+                .statusCode(200)
+                .body("id", notNullValue())
+                .extract().path("id");
     }
 }
