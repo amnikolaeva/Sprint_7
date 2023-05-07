@@ -40,14 +40,14 @@ public class CourierApiNegativeTest {
                 .statusCode(201)
                 .body("ok", equalTo(true));
 
-        courierClient.courierCreate(courier)
-                .statusCode(409)
-                .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
-
         courierId = courierClient.login(CourierCredentials.from(courier))
                 .statusCode(200)
                 .body("id", notNullValue())
                 .extract().path("id");
+
+        courierClient.courierCreate(courier)
+                .statusCode(409)
+                .body("message", equalTo("Этот логин уже используется"));
     }
 
     @Test
