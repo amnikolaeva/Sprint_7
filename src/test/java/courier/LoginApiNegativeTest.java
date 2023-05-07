@@ -2,6 +2,7 @@ package courier;
 
 import client.CourierClient;
 import generator.CourierGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import model.Courier;
 import model.CourierCredentials;
@@ -24,6 +25,7 @@ public class LoginApiNegativeTest {
     }
 
     @Test
+    @DisplayName("Авторизация курьера без логина")
     public void CourierLoginWithoutLogin() {
         courier.setLogin(null);
         courierClient.login(CourierCredentials.from(courier))
@@ -32,6 +34,7 @@ public class LoginApiNegativeTest {
     }
 
     @Test
+    @DisplayName("Авторизация курьера без пароля")
     public void CourierLoginWithoutPassword() {
         courier.setPassword(null);
         courierClient.login(CourierCredentials.from(courier))
@@ -40,6 +43,7 @@ public class LoginApiNegativeTest {
     }
 
     @Test
+    @DisplayName("Авторизация курьера с некорректным логином")
     public void CourierLoginWithIncorrectLogin() {
         courier.setLogin("test");
         courierClient.login(CourierCredentials.from(courier))
@@ -48,6 +52,7 @@ public class LoginApiNegativeTest {
     }
 
     @Test
+    @DisplayName("Авторизация курьера с некорректным паролем")
     public void CourierLoginWithIncorrectPassword() {
         courier.setPassword("test");
         courierClient.login(CourierCredentials.from(courier))

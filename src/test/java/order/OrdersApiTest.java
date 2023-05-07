@@ -1,6 +1,7 @@
 package order;
 
 import client.OrderClient;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +45,7 @@ public class OrdersApiTest {
     }
 
     @Test
+    @DisplayName("Заказ может быть создан")
     public void orderCanBeCreated() {
         orderClient.orderCreate(json)
                 .statusCode(201)

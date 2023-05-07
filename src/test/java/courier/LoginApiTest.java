@@ -2,6 +2,7 @@ package courier;
 
 import client.CourierClient;
 import generator.CourierGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import model.Courier;
 import model.CourierCredentials;
@@ -33,6 +34,7 @@ public class LoginApiTest {
     }
 
     @Test
+    @DisplayName("Позитивный тест на авторизацию курьера")
     public void CourierCanBeLogin() {
         courierId = courierClient.login(CourierCredentials.from(courier))
                 .statusCode(200)

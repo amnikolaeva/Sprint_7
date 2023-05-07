@@ -1,6 +1,7 @@
 package order;
 
 import client.OrderClient;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,6 +22,7 @@ public class OrderListApiTest {
     }
 
     @Test
+    @DisplayName("Тест на непустой список заказов")
     public void orderListIsNotEmpty() {
         List<Object> orderList = orderClient.orderList()
                 .statusCode(200)

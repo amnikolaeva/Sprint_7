@@ -2,6 +2,7 @@ package courier;
 
 import client.CourierClient;
 import generator.CourierGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import model.Courier;
 import model.CourierCredentials;
@@ -33,6 +34,7 @@ public class CourierApiTest {
     }
 
     @Test
+    @DisplayName("Позитивный тест на создание курьера")
     public void courierCanBeCreates() {
         courierClient.courierCreate(courier)
                 .statusCode(201)
@@ -45,6 +47,7 @@ public class CourierApiTest {
     }
 
     @Test
+    @DisplayName("Позитивный тест на создание курьера только с обязательными полями")
     public void courierCanBeCreatesWithLoginAndPassword() {
         courier.setFirstName(null);
         courierClient.courierCreate(courier)
